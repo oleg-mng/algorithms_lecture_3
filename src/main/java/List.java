@@ -1,6 +1,29 @@
 public class List {
     Node head;
-//    Node tail;
+    Node tail;
+    public void push (int value){
+        Node node = new Node();
+        node.value = value;
+        node.next = head;
+        head = node;
+    }
+    public Integer peek(){
+        Integer result = null;
+        if (tail != null){
+            result = tail.value;
+            tail.previous.next = null;
+            tail = tail.previous;
+        }
+        return result;
+    }
+    public Integer pop(){
+        Integer result = null;
+        if (head != null){
+            result = head.value;
+            head = head.next;
+        }
+        return result;
+    }
 
 //    public void add(int value) {
 //        Node node = new Node();
@@ -75,22 +98,28 @@ public class List {
 //        }
 //    }
 
-    public void revert(){
-        if (head!= null )
-    }
-    private void revert (Node currentNode, Node previousNode){
-        if (currentNode.next == null){
-            head = currentNode;
+    public void revert() {
+        if (head != null && head.next != null) {
+            Node temp = head;
+            revert(head.next, head);
+            temp.next = null;
         }
-        else {
+    }
+
+    private void revert(Node currentNode, Node previousNode) {
+        if (currentNode.next == null) {
+            head = currentNode;
+        } else {
             revert(currentNode.next, currentNode);
         }
         currentNode.next = previousNode;
+        previousNode.next = null;
     }
+
     public class Node {
         int value;
         Node next;
-//
-//        Node previous;
+
+        Node previous;
     }
 }
