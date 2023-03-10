@@ -29,6 +29,12 @@ public class List {
             newNode.next = next;
         }
     }
+    public void delete(Node node){
+        Node previous = node.previous;
+        Node next = node.next;
+        previous.next = next;
+        next.previous = previous;
+    }
 
     public Node find(int value) {
         Node currentNode = head;
