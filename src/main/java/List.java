@@ -32,8 +32,20 @@ public class List {
     public void delete(Node node){
         Node previous = node.previous;
         Node next = node.next;
-        previous.next = next;
-        next.previous = previous;
+        if (previous == null){
+            next.previous = null;
+            head = next;
+        }
+        else {
+            if (next == null){
+                previous.next = null;
+                tail = previous;
+            }
+            else {
+                previous.next = next;
+                next.previous = previous;
+            }
+        }
     }
 
     public Node find(int value) {
@@ -45,6 +57,22 @@ public class List {
             currentNode = currentNode.next;
         }
         return null;
+    }
+    public void revert(){
+        Node currentNode = head;
+        while (currentNode != null){
+            Node next = currentNode.next;
+            Node previous = currentNode.previous;
+            currentNode.next = previous;
+            currentNode.previous = next;
+            if (previous == null){
+                tail = currentNode;
+            }
+            if (next == null){
+                head = currentNode;
+            }
+            currentNode = next;
+        }
     }
 
     public class Node {
