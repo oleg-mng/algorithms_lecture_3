@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Objects;
 
 public class List {
@@ -16,10 +17,24 @@ public class List {
         l1.add(9);
         l1.add(11);
         l1.add(13);
-        l1.find(11);
-        System.out.println(l1.hashCode());
+
+        printList(l1.head);
+
+        System.out.println(l1.find(11).value);
+
     }
 
+    public static void printList(Node head)
+    {
+        Node ptr = head;
+        while (ptr != null)
+        {
+            System.out.print(ptr.value + " —> ");
+            ptr = ptr.next;
+        }
+
+        System.out.println("null");
+    }
 
     @Override
     public int hashCode() {
