@@ -1,42 +1,77 @@
+import java.util.Objects;
+
 public class List {
     Node head;
     Node tail;
-    public void push (int value){
-        Node node = new Node();
-        node.value = value;
-        node.next = head;
-        head = node;
-    }
-    public Integer peek(){
-        Integer result = null;
-        if (tail != null){
-            result = tail.value;
-            tail.previous.next = null;
-            tail = tail.previous;
-        }
-        return result;
-    }
-    public Integer pop(){
-        Integer result = null;
-        if (head != null){
-            result = head.value;
-            head = head.next;
-        }
-        return result;
+
+    public static class Node {
+        int value;
+        Node next;
+        Node previous;
     }
 
-//    public void add(int value) {
+    public static void main(String[] args) {
+        List l1 = new List();
+        List l2 = new List();
+        l1.add(9);
+        l1.add(11);
+        l1.add(13);
+        l1.find(11);
+        System.out.println(l1.hashCode());
+    }
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(head, tail);
+    }
+
+    public Node find(int value) {
+        Node currentNode = head;
+        while (currentNode != null) {
+            if (currentNode.value == value) {
+                return currentNode;
+            }
+            currentNode = currentNode.next;
+        }
+        return null;
+    }
+//    public void push (int value){
 //        Node node = new Node();
 //        node.value = value;
-//        if (head == null) {
-//            head = node;
-//            tail = node;
-//        } else {
-//            tail.next = node;
-//            node.previous = tail;
-//            tail = node;
-//        }
+//        node.next = head;
+//        head = node;
 //    }
+//    public Integer peek(){
+//        Integer result = null;
+//        if (tail != null){
+//            result = tail.value;
+//            tail.previous.next = null;
+//            tail = tail.previous;
+//        }
+//        return result;
+//    }
+//    public Integer pop(){
+//        Integer result = null;
+//        if (head != null){
+//            result = head.value;
+//            head = head.next;
+//        }
+//        return result;
+//    }
+
+    public void add(int value) {
+        Node node = new Node();
+        node.value = value;
+        if (head == null) {
+            head = node;
+            tail = node;
+        } else {
+            tail.next = node;
+            node.previous = tail;
+            tail = node;
+        }
+    }
 //
 //    public void add(int value, Node node) {
 //        Node next = node.next;
@@ -71,16 +106,6 @@ public class List {
 //        }
 //    }
 //
-//    public Node find(int value) {
-//        Node currentNode = head;
-//        while (currentNode != null) {
-//            if (currentNode.value == value) {
-//                return currentNode;
-//            }
-//            currentNode = currentNode.next;
-//        }
-//        return null;
-//    }
 //    public void revert(){
 //        Node currentNode = head;
 //        while (currentNode != null){
@@ -98,28 +123,21 @@ public class List {
 //        }
 //    }
 
-    public void revert() {
-        if (head != null && head.next != null) {
-            Node temp = head;
-            revert(head.next, head);
-            temp.next = null;
-        }
-    }
-
-    private void revert(Node currentNode, Node previousNode) {
-        if (currentNode.next == null) {
-            head = currentNode;
-        } else {
-            revert(currentNode.next, currentNode);
-        }
-        currentNode.next = previousNode;
-        previousNode.next = null;
-    }
-
-    public class Node {
-        int value;
-        Node next;
-
-        Node previous;
-    }
+//    public void revert() {
+//        if (head != null && head.next != null) {
+//            Node temp = head;
+//            revert(head.next, head);
+//            temp.next = null;
+//        }
+//    }
+//
+//    private void revert(Node currentNode, Node previousNode) {
+//        if (currentNode.next == null) {
+//            head = currentNode;
+//        } else {
+//            revert(currentNode.next, currentNode);
+//        }
+//        currentNode.next = previousNode;
+//        previousNode.next = null;
+//    }
 }
